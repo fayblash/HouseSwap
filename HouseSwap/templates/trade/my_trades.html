@@ -1,0 +1,26 @@
+<section id="swaps" class="py-4">
+    <div class="container">
+        <div class="row">
+            {% if swaps %}
+            <h2>My Swaps</h2>
+            {% for swap in swaps %}
+                    <div class="card-body">
+                        <div class="swap-heading text-center">
+                            <h4 class="text-primary">{{trade.date}} |  <a href="{% url 'listing' trade.listing.id %}"> {{trade.title}}</a></h4>
+                        </div>
+                        <a href="{% url 'add_review' listing.id %}" class="stretched-link btn btn-sm btn-info">Add Review</a>
+                
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <div class='col-md-12'>
+                <p>No Swaps Available</p>
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+​
+{% load pinax_messages_tags %}
+​
+{% block content %}
+<div class="pinax-messages-inbox-container forum-index">
+    <h2 class="with-actions container">
+        Inbox
+    </h2>
+</div>
+<div class='container'>
+    <section class="mailbox">
+        {% for thread in threads %}
+        <div class="container">
+                <div class="participants">Participants: {{ thread.users.all|join:", " }}</div>
+                <div class="latest-message">
+                    <p class="subject">Title: {{ thread.subject }}</p>
+                    <p class="content">Last Message: {{ thread.latest_message.content }}</p>
+                </div>
+                <a class= 'btn comment-btn' href="{{thread.get_absolute_url}}">Go to this thread</a>
+            <hr>
+        </div>
+        {% empty %}
+        <div class="no-messages">You have no messages</div>
+        {% endfor %}
+    </section>
+
+    <a class="button btn comment-btn" href="{% url 'pinax_messages:message_create' %}">
+        <i class="fas fa-envelope"></i>
+        Compose New Message
+    </a>
+</div>
+<br>
+{% endblock %}

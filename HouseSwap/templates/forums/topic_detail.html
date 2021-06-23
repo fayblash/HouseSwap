@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="forum-index">
+        <div class='container pt-2 pb-2'>
+            <h1>{{object.title}}</h1>
+        </div>
+    </div>
+<div class='container'>
+    <div class="posts mt-5">
+        {% for post in posts %}
+            <div class="row post mb-4">
+                <div class="col-1">
+                        <img class="account-img rounded-circle" src="{{ post.author.image.url }}" height="50">
+                </div>
+                <div class='col-11'>
+                        <a href="{% url 'post-detail' post.id %}"><h4 class="post_title">{{ post.title }}</h4></a>
+                    <div class='timestamp'> post by {{ post.author }} created on {{post.timestamp}}</div>
+                    <hr>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class='row'>
+        <div class='col-4 ps-0'>
+        <a class="btn comment-btn btn-lg" href="{% url 'post-create' object.id %}">New Post</a>
+    </div></div>
+{% endif %}
+<br>
+</div>
+{% endblock content %} 

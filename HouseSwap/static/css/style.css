@@ -1,0 +1,89 @@
+body{
+    font-family: Raleway;
+    width: 100 vw;
+}
+nav {
+    background-color: #004c56;
+    color: white;
+}
+.logo {
+    width: 80px; }
+
+#showcase {
+    background: url(../img/home-background.jpg) no-repeat top center;
+    background-size: cover;
+    position: relative;
+    min-height: 650px;
+    color: #222830;
+    padding-top: 6rem; }    
+
+footer {
+  
+    background-color:#004c56;   
+    color:white
+
+}
+.services{
+    background-color: #b0b5b5;
+    color:white;
+}
+.testimonials{
+    background-color: #ecbd8b;
+    padding: 5px;
+}
+
+.timestamp {
+    font-size: 12px;
+    font-style: italic;
+}
+.orange{
+    color:#f4841a;
+}
+.comment-btn{
+    background-color: #e45149;
+    color: white;
+}
+.forum-index{
+    background-color: #b6d2dd;
+    color: white;
+}
+.forum-header{
+    padding-left: 0; 
+    padding-top: 5px;
+    margin-bottom: 2px;
+}
+
+a {
+    text-decoration: none;
+    color:#004c56;
+}
+
+.house-img{
+    height: 200px;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.carousel-item {
+    margin: 10px;
+    padding: 10px;
+}
+.follow {
+    width:100%;
+    margin:0 auto;
+    display:inline-block;
+    text-align:center;
+    color: white;
+    font-size: 2rem;
+}
+.home{
+    font-size: 2rem;
+}
+
+.green{
+    color:#004c56;
+}

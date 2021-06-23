@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="forum-index">
+    <div class='container'>
+        <h1>New Post</h1>
+    </div>
+</div>
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+        {% bootstrap_form form %}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn comment-btn" type="submit">Create</button>
+        </div>
+    </form>
+    <br>
+</div>
+
+{% endblock content %} 

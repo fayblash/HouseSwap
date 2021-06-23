@@ -1,0 +1,26 @@
+<section id="listings" class="py-4">
+    <div class="container">
+        <div class="row">
+            {% if testimonials %}
+
+            {% for testimonial in testimonials %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card-body">
+                    <div>{{listing.text}}</div>
+                    <div>{{listing.author}}</div>
+                    <div> {{listing.date}}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% else %}
+
+        <div class='col-md-12'>
+            <p>No Testimonials Available</p>
+        </div>
+
+        {% endif %}
+    </div>
+    </div>
+</section>

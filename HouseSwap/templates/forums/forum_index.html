@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='forum-index'>
+    <div class='container forum-header pt-2 pb-2'>
+        <h1>Forums</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="topics">
+        <br>
+        {% for topic in topics %}
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'topic-detail' topic.id %}">
+                    <h3 class="row topic_title">{{ topic.title }}</h3>
+                </a>
+                <p class="row">{{ topic.description }}</p>
+            </div>
+            <hr>
+        </div>
+        {% endfor %}
+
+        {% if user.is_superuser %}
+        <div class='row mb-5'>
+           <div class='col-3 ps-0'>
+        <a class="btn comment-btn btn-lg" href="{% url 'topic-add' %}">Add New Forum</a>
+    </div></div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock content %}

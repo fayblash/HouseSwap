@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %}
+Homepage
+{% endblock title %}
+
+{% block content %}
+<div id='showcase'>
+  <div class='container text-center'>
+    <h1>Israel House Swap</h1>
+    <h3>The hottest site to find your next house swap in Israel</h3>
+  </div>
+</div>
+
+<!-- Listings -->
+<section id="listings" class="py-4">
+  <div class="container">
+    <div class="row">
+      {% if listings %}
+
+      {% for listing in listings %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card listing-preview">
+          <img class="card-img-top house-img" src="{{listing.img_main.url}}" alt="">
+          <div class="card-img-overlay">
+                <img class="account-img rounded-circle border border-white ms-2" src="{{ listing.host.image.url }}"
+                  height="50">
+                  <br>
+                <h6 class="badge badge-secondary text-white">{{listing.host}}'s home</h6>
+          </div>
+          <div class="card-body">
+            <div class="listing-heading text-center">
+              <a href="{% url 'listing' listing.id %}" class="stretched-link"><h4>{{listing.title}}</h4></a>
+              <p>
+                {{listing.city}}, {{listing.region}}
+              </p>
+            </div>
+            <hr>
+            <div class="row py-2 text-secondary">
+              <div class="col-4">
+                <i class="fas fa-user green"></i> {{listing.sleeps}} Ppl
+              </div>
+              <div class="col-4">
+                <i class="fas fa-bed green"></i> {{listing.bedrooms}} BR
+              </div>
+              <div class="col-4">
+                <i class="fas fa-toilet green"></i> {{listing.bathrooms}} Baths
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% else %}
+
+      <div class='col-md-12'>
+        <p>No Listings Available</p>
+      </div>
+
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<div class='container text-center'>
+  <a href="{% url 'listings' %}" class='btn comment-btn btn-lg mb-5'>See All Listings</a>
+</div>
+
+<!-- Services -->
+<div class="services">
+  <div class="row text-center pt-5">
+    <div class="col-md-4">
+      <i class="fas fa-comment fa-4x mr-4"></i>
+      <hr>
+      <h3>Discussion Forums</h3>
+      <p>Want to find out more about the city you're visiting? Have questions about how a swap actually works? Our
+        forums are the perfect spot to ask questions and discuss any issues about your upcoming swap.</p>
+    </div>
+    <div class="col-md-4">
+      <i class="fas fa-home fa-4x mr-4"></i>
+      <hr>
+      <h3>Find Beautiful Homes</h3>
+      <p>Who needs a hotel when you can swap with other people's beautiful, unique, well-equipped homes! </p>
+    </div>
+    <div class="col-md-4">
+      <i class="fas fa-suitcase fa-4x mr-4"></i>
+      <hr>
+      <h3>Explore New Locations</h3>
+      <p>Find wonderful new vacation spots, new activities and adventures, with the assistance and guidance of
+        your hosts.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials -->
+<div class='testimonials'>
+  <div class='row text-center pt-3'>
+    <div class=col>
+    <h3>What our members have to say</h3>
+    <div class='testimonial-carousel-container'>
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active text-center">
+            <div>"I am obsessed with this site!! This is a total game-changer for vacationing in Israel! I will be coming here
+              to plan every vacation from now on!"</div>
+            
+            <img src="media/photos/elisheva.jpg" class="profile-pic">
+          <div>Elisheva</div>
+        </div>
+          {% for testimonial in testimonials %}
+          <div class="carousel-item text-center">
+            <div>"{{ testimonial.text}}"</div>
+            <img class="rounded-circle account-img thumbpic" src="{{ testimonial.author.image.url }}" height="50">
+          <div>{{testimonial.author}}</div>
+        </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

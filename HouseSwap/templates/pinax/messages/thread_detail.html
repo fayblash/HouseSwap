@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load bootstrap5 %}
+
+{% block content %}
+
+<div class="pinax-messages-thread-detail-container forum-index pt-2 pb-2 mb-2">
+    <div class='container'>
+    <h2 class="with-actions">
+        {{ thread.subject }}
+    </h2></div>
+</div>
+<div class=container>
+    <section class="thread-messages">
+        {% for message in thread.messages.all %}
+        <div class="thread-message">
+            <div class="message-byline">
+                <div class="message-from">From: {{ message.sender.username }}</div>
+                <div class="message-sent">Sent at: {{ message.sent_at }}</div>
+            </div>
+            <div class="message-content">Message: {{ message.content|urlize|linebreaks }}</div>
+            <hr>
+        </div>
+        {% endfor %}
+    </section>
+
+    <form class="comment-form" action="{% url 'pinax_messages:thread_detail' thread.pk %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="form-actions">
+            <button class='btn comment-btn'>Send</button>
+        </div>
+    </form>
+    <hr>
+    <a class="button btn btn-lg comment-btn" href="{% url 'pinax_messages:thread_delete' thread.pk %}">Delete Thread</a>
+    
+</div>
+<br>
+{% endblock %}

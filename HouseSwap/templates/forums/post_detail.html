@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% block content %}
+<div class='container'>
+    <div class="row">
+        <div class="col mt-5 forum-index">
+            <h1 id="header">{{ object.title }}</h1>
+        </div>
+    </div>
+      {% if object.author == user.profile %} 
+    <div class='row'>
+        <div class='col-2 mt-1 ps-0'>
+            <div>
+                <a class="btn comment-btn btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">delete</a>
+            </div>
+        </div>
+    </div>
+ {% endif %}
+    <div class="row mt-4">
+        <div class="col-1 text-center">
+            <img class="rounded-circle account-img thumbpic" src="{{ object.author.image.url }}" height="50">
+            </a>
+            <span>{{object.author}}</span>
+        </div>
+
+        <div class="col-11">
+            <h4>{{ object.body }}<h4>
+                    <br>
+                    <div class='timestamp'> posted on: {{object.timestamp}}</div>
+        </div>
+    </div>
+
+    <hr>
+
+    {% for comment in comments %}
+    <div class="row comment mb-4">
+        <div class="col-1">
+            <img class="account-img rounded-circle" src="{{ comment.author.image.url }}" height="50">
+        </div>
+        <div class='col-11'>
+            <h6 class="post_title">{{ comment.body}}</h6>
+            <div class='timestamp'> reply by {{ post.author }} posted on {{post.timestamp}}</div>
+            <hr>
+        </div>
+    </div>
+    {% endfor %}
+    <hr>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class='input'>
+                {% bootstrap_form form %}
+            </div>
+            <div class="form-group">
+                <button class="btn comment-btn btn-lg" type="submit">Submit</button>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock content %}

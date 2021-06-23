@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+<h1>Offer Swap</h1>
+
+<h3> Offer a trade for {{listing}}</h3>
+<form method='post'>
+    {% csrf_token %}
+    <div class="input mb-3">
+        <input type="hidden" name="host1" value="{{user.profile}}">
+        <input type="hidden" name="host2" value="{{listing.host}}">
+        <input type="hidden" name="listing2" value="{{listing.id}}">
+        <input type="hidden" name="status" value="Pending">
+        <div>Welcome {{user.profile}}</div>
+        <div>Pick which home you want to offer: </div>
+        <div>{{form.listing1}}</div>
+    </div>
+    <div class="input mb-3"></div>
+        <div>Write the details of the offer you are proposing: </div>
+        <div>{{form.text}}</div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-info">Offer a swap</button>
+</form>
+
+{% endblock %}

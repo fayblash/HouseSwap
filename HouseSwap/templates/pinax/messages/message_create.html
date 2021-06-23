@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load bootstrap5 %}
+
+{% block content %}
+   
+<div class='forum-index'> 
+    <div class='container'><h2>New Message</h2></div>
+</div>
+ <div class='container'>
+    <form class="comment-form" action="{% url 'pinax_messages:message_create' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="form-actions">
+            <button class=' btn comment-btn btn-lg'>Send</button>
+        </div>
+        <br>
+    </form>
+</div>
+{% endblock %}

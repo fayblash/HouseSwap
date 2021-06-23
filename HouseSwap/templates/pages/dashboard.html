@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Dashboard
+{% endblock title %}
+
+{% block content %}
+
+<h1>{{user.profile}}'s Dashboard</h1>
+
+{% if user.is_authenticated %}
+<a href="{% url 'update_profile' %}" class="btn btn-lg btn-info mb-1">Update your Profile</a>
+<a href="{% url 'pinax_messages:inbox' %}"><i class="fa fa-envelope"></i>Message Inbox</a>
+
+{% include 'listings/my_listings.html' %} 
+<a href="{% url 'add_listing' %}" class="btn btn-lg btn-info mb-1">Add New Listing</a>
+
+{% if testimonials %}
+<h3>Testimonial</h3>
+{% for testimonial in testimonials%}
+    <h6>{{testimonial.text}}</h6>
+    <h6>{{testimonial.date}}</h6>
+    <a href="{% url 'update_testimonial' testimonial.id %}" class="btn btn-info">Update</a>
+    <a href="{% url 'delete_testimonial' testimonial.id %}" class="btn btn-danger">Delete</a>
+{% endfor %}
+{% else %}
+<a href="{% url 'add_testimonial' %}" class="btn btn-info">Add New Testimonial</a>
+{% endif %}
+
+{% include 'trade/my_offers.html' %} 
+{% include 'trade/my_requests.html' %} 
+
+{% else %}
+<h3>Please login to view your content</h3>
+{%endif%}
+
+
+{% endblock content %}
