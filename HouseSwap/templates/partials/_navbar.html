@@ -1,48 +1,49 @@
 {% load static %}
 
-<nav class="navbar navbar-dark navbar-expand-md justify-content-center">
+
+<nav class="navbar navbar-expand-md navbar-dark">
   <div class="container">
-    <a class="navbar-brand text-light home" href="{% url 'index' %}">
-      <i class="fas fa-home"></i>
-    </a>
+    <a class="navbar-brand text-light home" href="{% url 'index' %}"><i class="fas fa-home"></i></a>
     <span class="navbar-brand flex-grow-1">Israel House Swap</span>
-    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#swap-navbar">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSwap"
+      aria-controls="navbarSwap" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse collapse w-100" id="swap-navbar">
-      <ul class="navbar-nav w-100 justify-content-center">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Link</a>
+    <div class="collapse navbar-collapse" id="navbarSwap">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'index' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="//codeply.com">Codeply</a>
+          <a class="nav-link text-light" href="{% url 'listings' %}">Listings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link text-light" href="{% url 'forum-index' %}">Forums</a>
         </li>
       </ul>
-      {% if user.is_authenticated %}
-      <ul class="navbar-nav ms-auto w-100 justify-content-end">
-        <li class="nav-item">
-          <div class="nav-link text-light">
-            Hello {{user}}</div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="{% url 'dashboard' %}">My Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
-        </li>
-      </ul>
-      {% else%}
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link text-light" href="{% url 'register' %}">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="{% url 'login' %}">Login</a>
-        </li>
-        {% endif %}
+        {% if user.is_authenticated %}
+      <li class="nav-item">
+        <div class="nav-link">
+          Hello {{user}}</div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'dashboard' %}">My Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
+      </li>
+    </ul>
+    {% else%}
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'register' %}">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'login' %}">Login</a>
+      </li>
+      {% endif %}
       </ul>
     </div>
+  </div>
 </nav>
+

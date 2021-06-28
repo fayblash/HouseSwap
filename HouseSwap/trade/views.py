@@ -53,6 +53,7 @@ def offer_trade(request,pk):
 def reject_offer(request,pk):
     offer=Offer.objects.get(id=pk)
     offer.status = 'Rejected'
+    offer.save()
     return redirect ('dashboard')
 
 def delete_offer(request,pk):

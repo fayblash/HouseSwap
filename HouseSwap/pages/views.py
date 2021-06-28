@@ -27,7 +27,9 @@ def dashboard(request):
     testimonials = Testimonial.objects.filter(author=user)
     offers=Offer.objects.filter(status="Pending").filter(host1=user)
     requests=Offer.objects.filter(status="Pending").filter(host2=user)
-    history=Offer.objects.filter(Q(status__in=('Accepted','Rejected')))
-    
-    context={'listings':listings,'offers':offers,'requests':requests, 'testimonials':testimonials}
+    o_swaps=Offer.objects.filter(status="Accepted").filter(host1=user)
+    r_swaps=Offer.objects.filter(status="Accepted").filter(host2=user)
+    o_history=Offer.objects.filter(status="Rejected").filter(host1=user)
+    r_history=Offer.objects.filter(status="Rejected").filter(host2=user)
+    context={'listings':listings,'offers':offers,'requests':requests, 'o_swaps':o_swaps, 'r_swaps':r_swaps, 'o_history':o_history, 'r_history':r_history,'testimonials':testimonials}
     return render(request, "pages\dashboard.html", context)

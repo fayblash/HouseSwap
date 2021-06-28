@@ -7,14 +7,14 @@ Update Listing
 
 {% block content %}
 <div class="card">
-    <div class="card-header">
-        <h1 class="text-center">Update Listing</h1>
+    <div class="forum-index py-2">
+        <h1>Update Listing</h1>
     </div>
     <div class="card-body">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}    
-            <button type="submit" class="btn btn-lg btn-info">Update</button>
+            <button type="submit" class="btn comment-btn">Update</button>
             </div>
         </form>
     </div>

@@ -28,6 +28,7 @@ urlpatterns = [
     path('trade/',include('trade.urls')),
     path('testimonials/',include('testimonials.urls')),
     path('forums/',include('forums.urls')),
+    path('reviews/',include('review.urls')),
     path("messages/", include("pinax.messages.urls", namespace="pinax_messages")),
 
 ]

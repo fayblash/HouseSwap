@@ -6,8 +6,8 @@ Homepage
 {% block content %}
 <div id='showcase'>
   <div class='container text-center'>
-    <h1>Israel House Swap</h1>
-    <h3>The hottest site to find your next house swap in Israel</h3>
+    <div class='headline'>Israel House Swap</div>
+    <div class='sub-headline'>The #1 site to find your next house swap in Israel</div>
   </div>
 </div>
 
@@ -22,14 +22,16 @@ Homepage
         <div class="card listing-preview">
           <img class="card-img-top house-img" src="{{listing.img_main.url}}" alt="">
           <div class="card-img-overlay">
-                <img class="account-img rounded-circle border border-white ms-2" src="{{ listing.host.image.url }}"
-                  height="50">
-                  <br>
-                <h6 class="badge badge-secondary text-white">{{listing.host}}'s home</h6>
+            <img class="account-img rounded-circle border border-white ms-2" src="{{ listing.host.image.url }}"
+              height="50">
+            <br>
+            <h6 class="badge badge-secondary text-white">{{listing.host}}'s home</h6>
           </div>
           <div class="card-body">
             <div class="listing-heading text-center">
-              <a href="{% url 'listing' listing.id %}" class="stretched-link"><h4>{{listing.title}}</h4></a>
+              <a href="{% url 'listing' listing.id %}" class="stretched-link">
+                <h4>{{listing.title}}</h4>
+              </a>
               <p>
                 {{listing.city}}, {{listing.region}}
               </p>
@@ -45,6 +47,8 @@ Homepage
               <div class="col-4">
                 <i class="fas fa-toilet green"></i> {{listing.bathrooms}} Baths
               </div>
+              <hr>
+
             </div>
           </div>
         </div>
@@ -68,7 +72,7 @@ Homepage
 
 <!-- Services -->
 <div class="services">
-  <div class="row text-center pt-5">
+  <div class="row text-center pt-5 pb-5">
     <div class="col-md-4">
       <i class="fas fa-comment fa-4x mr-4"></i>
       <hr>
@@ -94,38 +98,42 @@ Homepage
 
 <!-- Testimonials -->
 <div class='testimonials'>
-  <div class='row text-center pt-3'>
+  <div class='row text-center'>
     <div class=col>
-    <h3>What our members have to say</h3>
-    <div class='testimonial-carousel-container'>
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active text-center">
-            <div>"I am obsessed with this site!! This is a total game-changer for vacationing in Israel! I will be coming here
-              to plan every vacation from now on!"</div>
-            
-            <img src="media/photos/elisheva.jpg" class="profile-pic">
-          <div>Elisheva</div>
+      <h3>What our members have to say</h3>
+      <div class='testimonial-carousel-container'>
+        <div id="carouselTestimonialsControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active text-center">
+              <div>"I am obsessed with this site!! This is a total game-changer for vacationing in Israel! I will be
+                coming here
+                to plan every vacation from now on!"</div>
+              <br>
+              <img src="media/photos/elisheva.jpg" class="profile-pic">
+              <div>Elisheva</div>
+            </div>
+            {% for testimonial in testimonials %}
+            <div class="carousel-item text-center">
+              <div>"{{ testimonial.text}}"</div>
+              <br>
+              <img class="rounded-circle account-img thumbpic" src="{{ testimonial.author.image.url }}" height="50">
+              <div>{{testimonial.author}}</div>
+            </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonialsControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonialsControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-          {% for testimonial in testimonials %}
-          <div class="carousel-item text-center">
-            <div>"{{ testimonial.text}}"</div>
-            <img class="rounded-circle account-img thumbpic" src="{{ testimonial.author.image.url }}" height="50">
-          <div>{{testimonial.author}}</div>
-        </div>
-          {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
     </div>
   </div>
-</div>
 </div>
 {% endblock content %}

@@ -2,17 +2,20 @@
 {% load bootstrap5 %}
 
 {% block title %}
-Update Testimonial
+Update Review
 {% endblock title %}
 
 {% block content %}
 
 <div class='forum-index'>
     <div class='container'>
-        <h1>Update Testimonial</h1>
+        <h1>Update Review</h1>
     </div>
 </div>
 <div class="container">
+    <h2>{{review.listing.title}}</h2>
+    <h6>Last updated: {{review.date}}</h6>
+    <br>
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}

@@ -2,8 +2,12 @@
 {% load bootstrap5 %}
 
 {% block content %}
-<h1>Add Listing</h1>
-
+<div class='forum-index'>
+<div class='container'>
+    <h1>Add Listing</h1>
+</div>
+</div>
+<div class='container'>
 <form method='post' enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
@@ -11,5 +15,5 @@
     <button type="submit">Save</button>
 
 </form>
-
+</div>
 {% endblock %}

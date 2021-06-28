@@ -1,18 +1,54 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load static %}
 
 {% block content %}
+<div class="swap-search">
+  <div class="p-5">
+    <h1 class="display-4 mb-4 text-center">
+      Find your next House Swap
+    </h1>
+    <p class="lead text-center">Search for homes to swap based on location, keyword, or the number of people in your group</p>
+    <div class="search">
+      <form action={% url 'search' %}>
+        <!-- Form Row 1 -->
+        <div class="row form-row">
+          <div class="col-6 mb-3">
+            <label class="sr-only">Keywords</label>
+            <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="sr-only">Number of people</label>
+            <input type="text" name="sleeps" class="form-control" placeholder="Guests">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="sr-only">City</label>
+            <input type="text" name="city" class="form-control" placeholder="City">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="sr-only">Region</label>
+            <input type="text" name="region" class="form-control" placeholder="Region">
+          </div>
+        </div>
+        <div class='d-grid'>
+        <button class="btn btn-secondary btn-block mt-2" type="submit">Search homes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <section id="listings" class="py-4">
   <div class="container">
     <div class="row">
 
-
       {% if listings %}
 
       {% for listing in listings %}
+      
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card listing-preview">
-          <img class="card-img-top house-img" src="{{listing.img_main.url}}" alt="">
+          <img class="card-img-top house-img" src="{{listing.img_main.url}}" alt="No Image">
           <div class="card-img-overlay">
                 <img class="account-img rounded-circle border border-white ms-2" src="{{ listing.host.image.url }}"
                   height="50">
@@ -53,6 +89,33 @@
       {% endif %}
     </div>
   </div>
+
+  <div class="row">
+    <div class="col">
+        {% if listings.has_other_pages %}
+        <ul class="pagination justify-content-center">
+            {% if listings.has_previous %}
+            <li><a href="?page={{ listings.previous_page_number }}" class='page-link'>&laquo;</a></li>
+            {% else %}
+            <li class="page-link disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in listings.paginator.page_range %}
+            {% if listings.number == i %}
+            <li class="page-link active"><span>{{ i }} <span class="sr-only page-link">(current)</span></span>
+            </li>
+            {% else %}
+            <li><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if listings.has_next %}
+            <li><a href="?page={{ listings.next_page_number }}" class="page-link">&raquo;</a></li>
+            {% else %}
+            <li class="page-link disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
 </section>
 
 {% endblock %}
