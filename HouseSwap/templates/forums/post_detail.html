@@ -19,8 +19,7 @@
  {% endif %}
     <div class="row mt-4">
         <div class="col-1 text-center">
-            <img class="rounded-circle account-img thumbpic" src="{{ object.author.image.url }}" height="50">
-            </a>
+            <img class="rounded-circle profile-pic" src="{{ object.author.image.url }}" height="50">
             <span>{{object.author}}</span>
         </div>
 
@@ -36,16 +35,15 @@
     {% for comment in comments %}
     <div class="row comment mb-4">
         <div class="col-1">
-            <img class="account-img rounded-circle" src="{{ comment.author.image.url }}" height="50">
+            <img class="profile-pic rounded-circle" src="{{ comment.author.image.url }}" height="50">
         </div>
         <div class='col-11'>
             <h6 class="post_title">{{ comment.body}}</h6>
-            <div class='timestamp'> reply by {{ post.author }} posted on {{post.timestamp}}</div>
+            <div class='timestamp'> reply by {{comment.author }} posted on {{comment.timestamp}}</div>
             <hr>
         </div>
     </div>
     {% endfor %}
-    <hr>
     <div>
         <form method="POST">
             {% csrf_token %}

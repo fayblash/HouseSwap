@@ -11,7 +11,7 @@
         {% for post in posts %}
             <div class="row post mb-4">
                 <div class="col-1">
-                        <img class="account-img rounded-circle" src="{{ post.author.image.url }}" height="50">
+                        <img class="profile-pic rounded-circle" src="{{ post.author.image.url }}" height="50">
                 </div>
                 <div class='col-11'>
                         <a href="{% url 'post-detail' post.id %}"><h4 class="post_title">{{ post.title }}</h4></a>
@@ -25,6 +25,7 @@
     <div class='row'>
         <div class='col-4 ps-0'>
         <a class="btn comment-btn btn-lg" href="{% url 'post-create' object.id %}">New Post</a>
+        <a class="btn comment-btn btn-lg" href="{% url 'forum-index' %}">Return to All Forums</a>
     </div></div>
 {% endif %}
 <br>

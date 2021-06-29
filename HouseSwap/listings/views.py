@@ -66,6 +66,7 @@ def listings(request):
         'South':'South',
         'North':'North',
     }
+    
     context={
         'listings':paged_listings,
         'region_choices':region_choices,
