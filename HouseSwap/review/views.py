@@ -21,7 +21,7 @@ def add_review(request,pk):
             return redirect('dashboard')
         else:
             messages.error(request, 'Bad form input')
-    return render(request, 'reviews/add_review.html', {'form':form})
+    return render(request, 'reviews/add_review.html', {'form':form, 'listing':listing})
 
 def update_review(request,pk):
     review = Review.objects.get(id=pk)

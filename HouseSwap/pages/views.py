@@ -9,7 +9,6 @@ from testimonials.models import Testimonial
 from django.contrib.auth.decorators import login_required
 from listings.forms import ListingForm
 from django.db.models import Q
-
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -24,12 +23,10 @@ def index(request):
 def dashboard(request):
     user=request.user.profile 
     listings = Listing.objects.filter(host=user)
-    testimonials = Testimonial.objects.filter(author=user)
+    testimonials = Testimonial.objects.filter(author=user)    
     offers=Offer.objects.filter(status="Pending").filter(host1=user)
     requests=Offer.objects.filter(status="Pending").filter(host2=user)
-    o_swaps=Offer.objects.filter(status="Accepted").filter(host1=user)
-    r_swaps=Offer.objects.filter(status="Accepted").filter(host2=user)
-    o_history=Offer.objects.filter(status="Rejected").filter(host1=user)
-    r_history=Offer.objects.filter(status="Rejected").filter(host2=user)
-    context={'listings':listings,'offers':offers,'requests':requests, 'o_swaps':o_swaps, 'r_swaps':r_swaps, 'o_history':o_history, 'r_history':r_history,'testimonials':testimonials}
+    swaps=Offer.objects.filter(status="Approved").filter(Q(host2=user) | Q(host1=user))  
+    history=Offer.objects.filter(status="Rejected").filter(Q(host2=user) | Q(host1=user))
+    context={'listings':listings,'offers':offers,'requests':requests,'swaps':swaps, 'history':history, 'testimonials':testimonials}
     return render(request, "pages\dashboard.html", context)

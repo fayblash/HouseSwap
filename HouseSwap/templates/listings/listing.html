@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container">
     <div id="carouselListingPics" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+        <div class="carousel-inner listing-carousel">
             <div class="carousel-item active">
                 <img src="{{listing.img_main.url}}" class="d-block w-100" alt="...">
             </div>
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="listing-heading text-center">
+    <div class="listing-heading text-center pt-3">
         <h4>{{listing.title}}</h4>
         <p>
             {{listing.city}}, {{listing.region}}
@@ -110,7 +110,7 @@
         <div class="row">
             <div class="col py-2">
                 <div>
-                    <img src="{{listing.host.image.url}}" alt="...">
+                    <img src="{{listing.host.image.url}}" alt="..."class='user-pic'>
                 </div>
                 <i class="fas fa-user green"></i> {{listing.host}}
             </div>
@@ -118,7 +118,7 @@
     </div>
     {% if user.is_authenticated %}
     <div class='text-center'>
-        <a href="#" class="btn comment-btn">Contact Host</a>
+        <a href="{% url 'pinax_messages:message_create' %}" class="btn comment-btn">Contact Host</a>
         <a href="{% url 'offer_trade' listing.id %}" class="btn comment-btn">Offer Swap</a>
     </div>
     {% endif %}

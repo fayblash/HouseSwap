@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}
+Update Offer
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="forum-index py-2">
+        <h1>Update Offer</h1>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}    
+            <button type="submit" class="btn comment-btn">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

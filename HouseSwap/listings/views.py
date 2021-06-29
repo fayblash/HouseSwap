@@ -58,8 +58,17 @@ def listings(request):
     paginator=Paginator(listings,3)
     page=request.GET.get('page')
     paged_listings=paginator.get_page(page)
+    
+    region_choices={
+        'Jerusalem':'Jerusalem',
+        'Center':'Center',
+        'Eilat':'Eilat',
+        'South':'South',
+        'North':'North',
+    }
     context={
-        'listings':paged_listings
+        'listings':paged_listings,
+        'region_choices':region_choices,
     }
  
     return render(request,'listings/listings.html',context) 

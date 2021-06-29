@@ -11,7 +11,7 @@
 <div class='container'>
     <section class="mailbox">
         {% for thread in threads %}
-        <div class="container">
+        <div>
                 <div class="participants">Participants: {{ thread.users.all|join:", " }}</div>
                 <div class="latest-message">
                     <p class="subject">Title: {{ thread.subject }}</p>
@@ -21,11 +21,11 @@
             <hr>
         </div>
         {% empty %}
-        <div class="no-messages">You have no messages</div>
+        <h2>You have no messages</h2>
         {% endfor %}
     </section>
 
-    <a class="button btn comment-btn" href="{% url 'pinax_messages:message_create' %}">
+    <a class="button btn green-white" href="{% url 'pinax_messages:message_create' %}">
         <i class="fas fa-envelope"></i>
         Compose New Message
     </a>

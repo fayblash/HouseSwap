@@ -1,0 +1,15 @@
+
+    {% if o_swaps %}
+    {% for o_swap in o_swaps %}
+    <div> you have a o_swap</div>
+    {% endfor %}
+{% elif r_swaps %}
+    {% for r_swap in r_swaps %}
+    <div> you have a r_swap </div>
+    {% endfor %}
+{% else %}
+    <div class='container my-3 text-center'>You haven't completed any swaps </div>
+{% endif%}
+{% if swaps %}
+    <div> you have a swap </div>
+    {% endif %}

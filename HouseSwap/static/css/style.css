@@ -57,14 +57,23 @@ a {
 
 .house-img{
     height: 200px;
-    width: 300px;
+    
 }
-
+.listing-carousel{
+    height: 600px;
+   
+}
 .profile-pic {
   width: 50px;
   height: 50px;
   overflow: hidden;
   border-radius: 50%;
+}
+
+.user-pic{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
 }
 .carousel-item {
     margin: 10px;

@@ -12,3 +12,7 @@ class OfferForm(forms.ModelForm):
         model = Offer
         fields = ['listing1','listing2','text','status']
          
+class UpdateOfferForm(forms.ModelForm):
+    class Meta:
+        model = Offer
+        fields = ['text']

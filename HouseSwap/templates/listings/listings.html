@@ -8,7 +8,8 @@
     <h1 class="display-4 mb-4 text-center">
       Find your next House Swap
     </h1>
-    <p class="lead text-center">Search for homes to swap based on location, keyword, or the number of people in your group</p>
+    <p class="lead text-center">Search for homes to swap based on location, keyword, or the number of people in your
+      group</p>
     <div class="search">
       <form action={% url 'search' %}>
         <!-- Form Row 1 -->
@@ -19,7 +20,7 @@
           </div>
           <div class="col-6 mb-3">
             <label class="sr-only">Number of people</label>
-            <input type="text" name="sleeps" class="form-control" placeholder="Guests">
+            <input type="text" name="sleeps" class="form-control" placeholder="Number of Guests">
           </div>
           <div class="col-6 mb-3">
             <label class="sr-only">City</label>
@@ -27,11 +28,16 @@
           </div>
           <div class="col-6 mb-3">
             <label class="sr-only">Region</label>
-            <input type="text" name="region" class="form-control" placeholder="Region">
+            <select name="region" class="form-control">
+              <option selected="true" disabled="disabled">Region (All)</option>
+              {% for key,value in region_choices.items %}
+              <option value="{{key}}">{{value}}</option>
+              {% endfor %}
+            </select>
           </div>
         </div>
         <div class='d-grid'>
-        <button class="btn btn-secondary btn-block mt-2" type="submit">Search homes</button>
+          <button class="btn btn-secondary btn-block mt-2" type="submit">Search homes</button>
         </div>
       </form>
     </div>
@@ -45,20 +51,22 @@
       {% if listings %}
 
       {% for listing in listings %}
-      
+
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card listing-preview">
           <img class="card-img-top house-img" src="{{listing.img_main.url}}" alt="No Image">
           <div class="card-img-overlay">
-                <img class="account-img rounded-circle border border-white ms-2" src="{{ listing.host.image.url }}"
-                  height="50">
-                  <br>
-                <h6 class="badge badge-secondary text-white">{{listing.host}}'s home</h6>
+            <img class="account-img rounded-circle border border-white ms-2" src="{{ listing.host.image.url }}"
+              height="50">
+            <br>
+            <h6 class="badge badge-secondary text-white">{{listing.host}}'s home</h6>
           </div>
           <div class="card-body">
             <div class="listing-heading text-center">
-              <a href="{% url 'listing' listing.id %}" class="stretched-link"><h4>{{listing.title}}</h4></a>
-              
+              <a href="{% url 'listing' listing.id %}" class="stretched-link">
+                <h4>{{listing.title}}</h4>
+              </a>
+
               <p>
                 {{listing.city}}, {{listing.region}}
               </p>
@@ -92,30 +100,30 @@
 
   <div class="row">
     <div class="col">
-        {% if listings.has_other_pages %}
-        <ul class="pagination justify-content-center">
-            {% if listings.has_previous %}
-            <li><a href="?page={{ listings.previous_page_number }}" class='page-link'>&laquo;</a></li>
-            {% else %}
-            <li class="page-link disabled"><span>&laquo;</span></li>
-            {% endif %}
-            {% for i in listings.paginator.page_range %}
-            {% if listings.number == i %}
-            <li class="page-link active"><span>{{ i }} <span class="sr-only page-link">(current)</span></span>
-            </li>
-            {% else %}
-            <li><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% if listings.has_next %}
-            <li><a href="?page={{ listings.next_page_number }}" class="page-link">&raquo;</a></li>
-            {% else %}
-            <li class="page-link disabled"><span>&raquo;</span></li>
-            {% endif %}
-        </ul>
+      {% if listings.has_other_pages %}
+      <ul class="pagination justify-content-center">
+        {% if listings.has_previous %}
+        <li><a href="?page={{ listings.previous_page_number }}" class='page-link'>&laquo;</a></li>
+        {% else %}
+        <li class="page-link disabled"><span>&laquo;</span></li>
         {% endif %}
+        {% for i in listings.paginator.page_range %}
+        {% if listings.number == i %}
+        <li class="page-link active"><span>{{ i }} <span class="sr-only page-link">(current)</span></span>
+        </li>
+        {% else %}
+        <li><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if listings.has_next %}
+        <li><a href="?page={{ listings.next_page_number }}" class="page-link">&raquo;</a></li>
+        {% else %}
+        <li class="page-link disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+      {% endif %}
     </div>
-</div>
+  </div>
 </section>
 
 {% endblock %}
