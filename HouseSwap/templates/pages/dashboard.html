@@ -71,7 +71,6 @@ My Dashboard
         <h3>My Testimonials</h3>
     </div>
     {% if testimonials %}
-
     {% for testimonial in testimonials%}
     <div class='container pt-3'>
         <h6>{{testimonial.text}}</h6>
@@ -92,46 +91,56 @@ My Dashboard
         <h3>My Open Swap Offers/Requests</h3>
     </div>
     <div class='container pt-2'>
-        {%if offers%}
-        <div>Swaps I've Offered</div>
-        {% for offer in offers %}
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card listing-preview">
-                <img class="card-img-top house-img" src="{{offer.listing2.img_main.url}}" alt="No image">
-                <div class="card-body text-center">
-                    <div class="listing-heading">
-                        <a href="{% url 'listing' offer.listing2.id %}">
-                            <h4 class="text-primary">{{offer.listing2.title}}</h4>
-                        </a>
+        <div class='row'>
+            {%if offers %}
+            <h4 class='text-center'>Swaps I have Offered</h4>
+            <hr>
+            {% for offer in offers %}
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card listing-preview">
+                    <div>You offered to swap with {{offer.listing2.host}}</div>
+                    <img class="card-img-top house-img" src="{{offer.listing2.img_main.url}}" alt="No image">
+                    <div class="card-body text-center">
+                        <div class="listing-heading">
+                            <a href="{% url 'listing' offer.listing2.id %}">
+                                <h4 class="text-primary">{{offer.listing2.title}}</h4>
+                            </a>
+                        </div>
+                        <div>{{offer.listing2.city}}, {{offer.listing2.region}}</div>
+                        <div>In exchange for : {{offer.listing1.title}}</div>
+                        <div>{{offer.text}}</div>
+                        <hr>
+                        <a href="{% url 'update_offer' offer.id %}" class="btn green-white">Update</a>
+                        <a href="{% url 'delete_offer' offer.id %}" class="btn comment-btn">Delete</a>
                     </div>
-                    <div>{{offer.listing2.city}}, {{offer.listing2.region}}</div>
-                    <hr>
-                    <a href="{% url 'update_offer' offer.id %}" class="btn green-white">Update</a>
-                    <a href="{% url 'delete_offer' offer.id %}" class="btn comment-btn">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+
+        <div class='row'>
+            {% if requests %}
+            <h4 class='text-center'>Swaps I've been Offered</h4>
+            <hr>
+            {% for request in requests %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card requests-preview">
+                    <div>{{request.host1}} has offered to swap with you:</div>
+                    <img class="card-img-top house-img" src="{{request.listing1.img_main.url}}" alt="No image">
+                    <div class="card-body">
+                        <div><a href="{% url 'listing' request.listing1.id %}">{{request.listing1.title}}</a></div>
+                        <div>In exchange for : {{request.listing2.title}}</div>
+                        <div>{{request.text}}</div>
+                        <hr>
+                        <a href="{% url 'accept_offer' request.id %}" class="btn green-white">Accept</a>
+                        <a href="{% url 'reject_offer' request.id %}" class="btn comment-btn">Reject</a>
+                    </div>
                 </div>
             </div>
         </div>
         {% endfor %}
-        {% elif requests %}
-        <div>Swaps I've been Offered</div>
-        {% for request in requests %}
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card requests-preview">
-                <div>{{request.host1}} has offered to swap with you:</div>
-                <img class="card-img-top house-img" src="{{request.listing1.img_main.url}}" alt="No image">
-                <div class="card-body">
-                    <div><a href="{% url 'listing' request.listing1.id %}">{{request.listing1.title}}</a></div>
-                    <div>In exchange for : {{request.listing2.title}}</div>
-                    <div>{{request.text}}</div>
-                    <hr>
-                    <a href="{% url 'accept_offer' request.id %}" class="btn green-white">Accept</a>
-                    <a href="{% url 'reject_offer' request.id %}" class="btn comment-btn">Reject</a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <div class='container text-center my-3'>No Offers/Requests</div>
         {% endif %}
     </div>
 </div>
@@ -141,41 +150,43 @@ My Dashboard
         <h3>My Swaps</h3>
     </div>
     {% if swaps %}
-        {% for swap in swaps %}
-            {% if swap.host1 == user.profile %}
-            <div class='container'>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card requests-preview">
-                        <img class="card-img-top house-img" src="{{swap.listing2.img_main.url}}" alt="No image">
-                        <div class="card-body">
-                            <div>You swapped with {{swap.host2}}:</div>
-                            <div><a href="{% url 'listing' swap.listing2.id %}">{{swap.listing2.title}}</a></div>
-                            <div>In exchange for : {{swap.listing1.title}}</div>
-                            <div>Swap approved on: {{swap.date_created}}</div>
-                            <hr>
-                            <a href="{% url 'add_review' swap.listing2.id %}" class="btn green-white">Write Review for this Home</a>
-                        </div>
-                    </div>
+    {% for swap in swaps %}
+    {% if swap.host1 == user.profile %}
+    <div class='container'>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card requests-preview">
+                <img class="card-img-top house-img" src="{{swap.listing2.img_main.url}}" alt="No image">
+                <div class="card-body">
+                    <div>You swapped with {{swap.host2}}:</div>
+                    <div><a href="{% url 'listing' swap.listing2.id %}">{{swap.listing2.title}}</a></div>
+                    <div>In exchange for : {{swap.listing1.title}}</div>
+                    <div>Swap approved on: {{swap.date_created}}</div>
+                    <hr>
+                    <a href="{% url 'add_review' swap.listing2.id %}" class="btn green-white">Write Review for this
+                        Home</a>
                 </div>
             </div>
-            {% else %}
-            <div class='container'>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card requests-preview">
-                        <div>You swapped with {{swap.host1}}:</div>
-                        <img class="card-img-top house-img" src="{{swap.listing1.img_main.url}}" alt="No image">
-                        <div class="card-body">
-                            <div><a href="{% url 'listing' swap.listing1.id %}">{{swap.listing1.title}}</a></div>
-                            <div>In exchange for : {{swap.listing2.title}}</div>
-                            <div>Swap approved on: {{swap.date_created}}</div>
-                            <hr>
-                            <a href="{% url 'add_review' swap.listing1.id %}" class="btn green-white">Write Review for this Home</a>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    {% else %}
+    <div class='container'>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card requests-preview">
+                <div>You swapped with {{swap.host1}}:</div>
+                <img class="card-img-top house-img" src="{{swap.listing1.img_main.url}}" alt="No image">
+                <div class="card-body">
+                    <div><a href="{% url 'listing' swap.listing1.id %}">{{swap.listing1.title}}</a></div>
+                    <div>In exchange for : {{swap.listing2.title}}</div>
+                    <div>Swap approved on: {{swap.date_created}}</div>
+                    <hr>
+                    <a href="{% url 'add_review' swap.listing1.id %}" class="btn green-white">Write Review for this
+                        Home</a>
                 </div>
             </div>
-            {% endif %}
-        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
     {% else %}
     <div class='container my-3 text-center'>You haven't completed any swaps </div>
     {% endif %}
@@ -187,37 +198,37 @@ My Dashboard
         <h3>My History</h3>
     </div>
     {% if history %}
-        {% for his in history %}
-            {% if his.host1 == user.profile %}
-            <div class='container'>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card requests-preview">
-                        <img class="card-img-top house-img" src="{{his.listing2.img_main.url}}" alt="No image">
-                        <div class="card-body">
-                            <div>Your swap offer with {{his.host2}} was rejected:</div>
-                            <div>You requested: <a href="{% url 'listing' his.listing2.id %}">{{his.listing2.title}}</a></div>
-                            <div>In exchange for : {{his.listing1.title}}</div>
-                            <div>Swap rejected on: {{his.date_created}}</div>
-                        </div>
-                    </div>
+    {% for his in history %}
+    {% if his.host1 == user.profile %}
+    <div class='container'>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card requests-preview">
+                <img class="card-img-top house-img" src="{{his.listing2.img_main.url}}" alt="No image">
+                <div class="card-body">
+                    <div>Your swap offer with {{his.host2}} was rejected:</div>
+                    <div>You requested: <a href="{% url 'listing' his.listing2.id %}">{{his.listing2.title}}</a></div>
+                    <div>In exchange for : {{his.listing1.title}}</div>
+                    <div>Swap rejected on: {{his.date_created}}</div>
                 </div>
             </div>
-            {% else %}
-            <div class='container'>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card requests-preview">
-                        <div>You rejected a swap request with {{his.host1}}:</div>
-                        <img class="card-img-top house-img" src="{{his.listing1.img_main.url}}" alt="No image">
-                        <div class="card-body">
-                            <div>Swap offered: <a href="{% url 'listing' his.listing1.id %}">{{his.listing1.title}}</a></div>
-                            <div>In exchange for : {{his.listing2.title}}</div>
-                            <div>Swap rejected on: {{his.date_created}}</div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    {% else %}
+    <div class='container'>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card requests-preview">
+                <div>You rejected a swap request with {{his.host1}}:</div>
+                <img class="card-img-top house-img" src="{{his.listing1.img_main.url}}" alt="No image">
+                <div class="card-body">
+                    <div>Swap offered: <a href="{% url 'listing' his.listing1.id %}">{{his.listing1.title}}</a></div>
+                    <div>In exchange for : {{his.listing2.title}}</div>
+                    <div>Swap rejected on: {{his.date_created}}</div>
                 </div>
             </div>
-            {% endif %}
-        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
     {% else %}
     <div class='container my-3 text-center'>You don't have any history </div>
     {% endif %}
