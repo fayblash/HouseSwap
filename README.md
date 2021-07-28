@@ -7,3 +7,5 @@ This project was coded in Python, built on the Django framework. I came up with 
 and after seeing other successfull house swap sites, decided to create one specific to Israel.
 
 The site includes listings using CRUD methods, forums, messaging, reviews.  
+
+You can take a peek at the live site at  https://israelhouseswap.pythonanywhere.com/
