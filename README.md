@@ -8,4 +8,4 @@ and after seeing other successfull house swap sites, decided to create one speci
 
 The site includes listings using CRUD methods, forums, messaging, reviews.  
 
-You can take a peek at the live site at  https://israelhouseswap.pythonanywhere.com/
+You can take a peek at the live site at  https://israelhouseswap.pythonanywhere.com/ (user:demo, password: demo1234)
